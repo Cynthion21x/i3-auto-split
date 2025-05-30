@@ -1,0 +1,14 @@
+resolver: lts-18.28
+
+packages:
+- .
+
+extra-deps: [i3ipc-0.2.0.0]
+
+# Optional: allow newer versions of dependencies
+allow-newer: true
+
+# Optional: set compiler options
+ghc-options:
+  "$everything": -Wall
+
