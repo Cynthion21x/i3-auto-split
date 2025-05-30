@@ -3,11 +3,22 @@
 A simple and lightweight haskell project that automatically toggles between horizontal
 and vertical splits for you in an alternating pattern.
 
+# Features
+
+- Its easy to install
+- Its made in haskell :D
+- Perhaps there is more that could be added in the future
+
 # Installation
 
 You can build the code from source or just download a release.
 
 ### Build from source
+
+Prerequisites
+
+- Stack for Haskell
+- I3 (obviously)
 
 1. Clone the repository
 
