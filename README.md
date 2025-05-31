@@ -23,7 +23,7 @@ Prerequisites
 1. Clone the repository
 
    ```
-   git clone https://github.com/yourusername/i3-auto-split.git
+   git clone https://github.com/cynthion21x/i3-auto-split.git
    cd i3-auto-split
    ```
    
