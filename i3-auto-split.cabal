@@ -1,7 +1,7 @@
 cabal-version:       2.2 
 
 name:                i3-auto-split
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            automatically splits i3 windows in an alternating pattern
 -- description:
 homepage:            https://github.com/cynthion21x/i3-auto-split#readme
@@ -20,6 +20,7 @@ executable i3-auto-split
   build-depends:       base >=4.7 && <5,
                        i3ipc,
                        network,
+                       text
 
   ghc-options:         -Wall
                        -Wcompat
