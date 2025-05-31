@@ -7,7 +7,7 @@ and vertical splits for you in an alternating pattern.
 
 - Its easy to install
 - Its made in haskell :D
-- Perhaps there is more that could be added in the future
+- Command line configuration
 
 # Installation
 
@@ -50,6 +50,28 @@ exec --no-startup-id i3-auto-split
 To your i3 config otherwise if you downloaded it add
 ```
 exec --no-startup-id downloadPath/i3-auto-split
+```
+
+You can add some command line arguments to configure how it works.
+
+Verbose mode
+```
+i3-auto-split -v
+```
+
+Ignore specific windows (usefull for floating windows)
+```
+i3-auto-split -i xfce4-notifyd,dunst,kitty
+```
+
+Thread sleep time (how often the main thread of the program wakes up)
+```
+i3-auto-split -t 1000000000
+```
+
+You can easilly put lots of these in your i3 config like go
+```
+exec --no-startup-id downloadPath/i3-auto-split -i xfce4-notifyd,dunst,kitty -t 1000000000
 ```
 
 Now  when you restart your pc it should be up and running easy as that!
