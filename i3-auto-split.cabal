@@ -19,7 +19,7 @@ executable i3-auto-split
 
   build-depends:       base >=4.7 && <5,
                        i3ipc,
-                       network
+                       network,
 
   ghc-options:         -Wall
                        -Wcompat

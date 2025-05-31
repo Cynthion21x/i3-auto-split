@@ -9,45 +9,56 @@ import I3IPC
   )
 import qualified I3IPC.Subscribe as Sub
 import qualified I3IPC.Event as E
-import Control.Concurrent.MVar
-import Control.Monad (void, forever)
+import qualified I3IPC.Reply as R
+import Control.Monad (void, forever, when)
 import Control.Concurrent (threadDelay)
 import Network.Socket (Socket)
+
+appVersion :: String
+appVersion = "0.1.0.0"
 
 main :: IO ()
 main = do
 
     conn <- connecti3
-    putStrLn "Connected to i3 ^.^"
 
-    splitVar <- newMVar True
+    putStrLn ("I3-Auto-Split v" ++ appVersion)
+    putStrLn ("Connected to i3 :D")
 
-    subscribe (handler conn splitVar) [Sub.Window]
-    
+    subscribe (handler conn) [Sub.Window]
+
     forever $ threadDelay 1000000000
 
-handler :: Socket -> MVar Bool -> Either String E.Event -> IO ()
-handler conn splitVar event = 
-    case event of
+handler :: Socket -> Either String E.Event -> IO ()
+handler conn (Right (E.Window ev)) 
+    | E.win_change ev == E.WinNew = handleNewWin conn ev
+    | otherwise = return () 
+handler _ (Left err) = putStrLn $ "Error :c : " ++ err
+handler _ _ = return ()
 
-        Right (E.Window ev) -> 
+handleNewWin :: Socket -> E.WindowEvent -> IO ()
+handleNewWin conn ev = do
 
-            case E.win_change ev of
+    let node = E.win_container ev
+    let nodeType = R.node_type node
+    let nodeName = R.node_name node
 
-                E.WinNew -> do
+    putStrLn $ "New window type: " ++ show nodeType
+    putStrLn $ "New window name: " ++ show nodeName
+    
+    when (isTilingWindow ev) $ do
+        putStrLn "Handling new window"
+        void $ runCommand conn "split toggle"
 
-                    putStrLn "Found you making a new window"
+isTilingWindow :: E.WindowEvent -> Bool
+isTilingWindow ev = nodeType /= R.FloatingConType && 
+                    not (isNotification)
+    where node = E.win_container ev
+          nodeName = R.node_name node
+          nodeType = R.node_type node
 
-                    horizontal <- takeMVar splitVar
+          isNotification = case nodeName of
+              
+              Just name -> name `elem` ["xfce4-notifyd", "dunst"] 
+              Nothing -> False
 
-                    let cmd = if horizontal then "split v" else "split h"
-                    void $ runCommand conn cmd
-                    putMVar splitVar (not horizontal)
-
-                changeType -> 
-                    putStrLn $ "Ignoring window event: " ++ show changeType
-
-        Right _ -> return ()
-
-        Left err -> 
-            putStrLn $ "ERROR: " ++ err
