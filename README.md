@@ -81,5 +81,4 @@ Now  when you restart your pc it should be up and running easy as that!
 
 # Preview
 
-![demo](https://github.com/user-attachments/assets/71216ccf-38c8-4e7b-abb1-f3a391e456ff)
-
+![demo](https://github.com/user-attachments/assets/2d4e6988-207c-4a1e-b2f3-a671ed206997)
