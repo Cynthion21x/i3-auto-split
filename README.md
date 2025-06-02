@@ -7,13 +7,13 @@ and vertical splits for you in an alternating pattern.
 
 # Contents
 
-- [Instillation](https://github.com/Cynthion21x/i3-auto-split/?tab=readme-ov-file#installation)
+- [Installation](https://github.com/Cynthion21x/i3-auto-split/?tab=readme-ov-file#installation)
 - [Usage](https://github.com/Cynthion21x/i3-auto-split/?tab=readme-ov-file#usage)
 
 # Features
 
-- Its easy to install
-- Its made in haskell :D
+- Easy to install
+- Written in haskell :D
 - Command line configuration
 
 # Installation
@@ -66,22 +66,22 @@ Verbose mode
 i3-auto-split -v
 ```
 
-Ignore specific windows (usefull for floating windows)
+Ignore specific windows (useful for floating windows)
 ```
 i3-auto-split -i xfce4-notifyd,dunst,kitty
 ```
 
-Thread sleep time (how often the main thread of the program wakes up)
+Thread sleep time (interval for the main thread to wake up)
 ```
 i3-auto-split -t 1000000000
 ```
 
-You can easilly put lots of these in your i3 config like go
+You can easily put lots of these in your i3 config
 ```
 exec --no-startup-id downloadPath/i3-auto-split -i xfce4-notifyd,dunst,kitty -t 1000000000
 ```
 
-Now  when you restart your pc it should be up and running easy as that!
+Now  when you restart your computer it should be up and running. easy as that!
 
 # Preview
 
