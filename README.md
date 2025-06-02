@@ -7,8 +7,8 @@ and vertical splits for you in an alternating pattern.
 
 # Contents
 
-- [Installation](https://github.com/Cynthion21x/i3-auto-split/edit/main/README.md#installation)
-- [Usage](https://github.com/Cynthion21x/i3-auto-split/edit/main/README.md#usage)
+- [Instillation](https://github.com/Cynthion21x/i3-auto-split/?tab=readme-ov-file#installation)
+- [Usage](https://github.com/Cynthion21x/i3-auto-split/?tab=readme-ov-file#usage)
 
 # Features
 
