@@ -3,6 +3,9 @@
 A simple and lightweight haskell project that automatically toggles between horizontal
 and vertical splits for you in an alternating pattern.
 
+![GitHub Release](https://img.shields.io/github/v/release/cynthion21x/i3-auto-split) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cynthion21x/i3-auto-split) ![GitHub License](https://img.shields.io/github/license/cynthion21x/i3-auto-split)
+
+
 # Features
 
 - Its easy to install
