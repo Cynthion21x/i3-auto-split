@@ -17,7 +17,7 @@ import Network.Socket (Socket)
 import System.Environment (getArgs)
 
 appVersion :: String
-appVersion = "0.2.0.0"
+appVersion = "0.2.1.0"
 
 data Config = Config
     { verbose :: Bool
@@ -66,6 +66,7 @@ main = do
 handler :: Config -> Socket -> Either String E.Event -> IO ()
 handler config conn (Right (E.Window ev)) 
     | E.win_change ev == E.WinNew = handleNewWin config conn ev
+    | E.win_change ev == E.WinFocus = handleNewWin config conn ev
     | otherwise = return () 
 handler _ _ (Left err) = putStrLn $ "Error :c : " ++ err
 handler _ _ _ = return ()
@@ -73,18 +74,31 @@ handler _ _ _ = return ()
 handleNewWin :: Config -> Socket -> E.WindowEvent -> IO ()
 handleNewWin config conn ev = do
 
+    let node = E.win_container ev
+    let nodeSize = R.node_rect node
+
     when (verbose config) $ do
 
-        let node = E.win_container ev
         let nodeType = R.node_type node
         let nodeName = R.node_name node
 
+        let eventType = E.win_change ev
+
         putStrLn $ "New window type: " ++ show nodeType
         putStrLn $ "New window name: " ++ show nodeName
+        putStrLn $ "New window size: " ++ show nodeSize
+        putStrLn $ "Event: " ++ show eventType 
     
     when (isTilingWindow config ev) $ do
+
         putStrLn "Handling new window"
-        void $ runCommand conn "split toggle"
+
+        let winW = R.width nodeSize
+        let winH = R.height nodeSize
+
+        if (winW <= winH)
+            then void $ runCommand conn "split v"
+            else void $ runCommand conn "split h"
 
 isTilingWindow :: Config -> E.WindowEvent -> Bool
 isTilingWindow config ev = nodeType /= R.FloatingConType && 
