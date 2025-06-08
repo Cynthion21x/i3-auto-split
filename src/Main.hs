@@ -17,7 +17,7 @@ import Network.Socket (Socket)
 import System.Environment (getArgs)
 
 appVersion :: String
-appVersion = "0.2.1.0"
+appVersion = "0.2.1.1"
 
 data Config = Config
     { verbose :: Bool
@@ -51,13 +51,13 @@ main = do
     let config = parseArgs args
 
     when (verbose config) $ do
-        putStrLn ("Arguments: " ++ (show args))
+        putStrLn $ "Arguments: " ++ show args
         putStrLn $ "Ignoring windows: " ++ show (ignoreWindows config)
 
-    putStrLn ("I3-Auto-Split v" ++ appVersion)
+    putStrLn $ "I3-Auto-Split v" ++ appVersion
 
     conn <- connecti3
-    putStrLn ("Connected to i3 :D")
+    putStrLn "Connected to i3 :D"
 
     subscribe (handler config conn) [Sub.Window]
 
